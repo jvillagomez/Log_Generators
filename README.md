@@ -11,7 +11,8 @@
     <li>DIT LOG: CloudWatch event triggers are scheduled according to Microsoft Outlook calendar events.</li>
 </ul>
 
-![picture](docs/LogGenerator_schemas.png)
+![picture](docs/erc_schema.png)
+![picture](docs/dit_schema.png)
 
 <!-- ## Getting Started
 
