@@ -106,6 +106,7 @@ Deployment docs will be provided for Ubuntu Server 16.04 LTS. -->
 ## Built With
 * [Python 3](https://www.python.org/downloads/) - High-level programming language for general-purpose programming.
 * [Slack API package](http://slackapi.github.io/python-slackclient/) - Slack Developer Kit for Python.
+* [Cronofy API](https://www.cronofy.com/) - provides a unified calendar API to allow application developers to integrate their apps.
 * [Python Email](https://docs.python.org/2/library/email.html) - An email and MIME handling package.
 
 ## Authors

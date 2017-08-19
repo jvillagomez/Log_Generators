@@ -9,7 +9,7 @@ import boto3
 
 # timezone id/token for Cronofy
 timezone_id = 'US/Eastern'
-cronofy_token = os.environ['cronofy_token']
+cronofy_token = os.environ['CRONOFY_TOKEN']
 
 # ============================================================
 # USE: Initializes a cronofy client; needed to query calendar events.
@@ -28,7 +28,7 @@ def getCalendarEvent(client):
     to_date = (datetime.datetime.utcnow() + datetime.timedelta(hours=52))
     from_date = datetime.datetime.utcnow()
     # calendar id associated to calendar where work events (shifts) are created
-    cal_ID = os.environ['calendarID']
+    cal_ID = os.environ['UNEX_DITSW_CALENDAR_ID']
     # query the calendar for events (shifts)
     events = client.read_events(calendar_ids=(cal_ID,),
         from_date=from_date,
@@ -38,7 +38,7 @@ def getCalendarEvent(client):
 
     # ietaret through events looking for the work shift event (incase others types of events are present)
     for event in events:
-        if event['organizer']['email']==os.environ['SW_email']:
+        if event['organizer']['email']==os.environ['DITSW_EMAIL']:
             shift = {
                 "name":event['summary'],
                 "startsAt":event['start'],
@@ -83,7 +83,7 @@ def scheduleCloudWatchTrigger(client,shift):
     # Put an event rule
     response = client.put_rule(
         Name=triggerName,
-        RoleArn=os.environ['AdminRole_Arn'],
+        RoleArn=os.environ['AWS_ADMINROLE_ARN'],
         ScheduleExpression=cronEx,
         State='ENABLED'
     )
@@ -99,8 +99,8 @@ def addLambdaTarget(client,trigger):
         Rule=trigger,
         Targets=[
             {
-                'Arn': os.environ['SendDITLog_Arn'],
-                'Id': 'SendDITLog',
+                'Arn': os.environ['SENDDITLOG_LAMBDA_ARN'],
+                'Id': os.environ['SENDDITLOG_LAMBDA_NAME'],
             }
         ]
     )
